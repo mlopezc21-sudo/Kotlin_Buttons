@@ -56,8 +56,10 @@ fun Zorionak(modifier: Modifier = Modifier) {
 fun ZorionakTestua(modifier: Modifier = Modifier){
     Column(modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center) {
+        var testua by remember { mutableStateOf(value = "Ikaslearen Nota") }
+        var nota by remember { mutableStateOf(0) }
         Text(
-            text = "Zorionak 3PAG2ko Ikasleak!!",
+            text = testua,
             fontSize = 70.sp,
             textAlign = TextAlign.Center,
             lineHeight = 80.sp,
@@ -67,24 +69,31 @@ fun ZorionakTestua(modifier: Modifier = Modifier){
 
         )
         Text(
-            text="3PAG2Ko irakasleen partetik",
-            textAlign = TextAlign.Right,
+            text = "$nota",
+            fontSize = 70.sp,
+            textAlign = TextAlign.Center,
+            lineHeight = 80.sp,
             modifier = Modifier
-                .padding(15.dp)
                 .fillMaxWidth()
+                .padding(10.dp)
         )
-        var testua by remember { mutableStateOf(value = "") }
-        var nota by remember { mutableStateOf(0) }
-        Text(
-            text = "$testua: $nota"
-        )
-        Button(onClick = {
-            testua = "Ikaslearen Nota"
+        if (nota >= 10) {
+            testua = "Nota ezin da igo"
+            nota = 10
+        } else {
+            Button(onClick = {
             nota++
         },
             modifier = Modifier.padding(all = 20.dp)) {
-            Text(text = "Klikatu")
-        }
+            Text(text = "Klikatu",
+                fontSize = 50.sp,
+                textAlign = TextAlign.Center,
+                lineHeight = 50.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(10.dp))
+        }}
+
 
     }
 }
